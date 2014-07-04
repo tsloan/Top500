@@ -23,7 +23,7 @@ plot(df2013$rank)
 
 unique(df2013$country)
 summary(as.factor(df2013$country))
-plot(table(df2013$country))
+barplot(table(df2013$country),las=2) #las sets label orientation
 
 ## Create a list with all the XML file names
 ## use lapply across each of these lists to download the file
