@@ -6,6 +6,8 @@
 ##
 #############################################################################
 library(XML)
+
+
 fileURL="http://s.top500.org/static/lists/xml/TOP500_199306_all.xml"
 doc<-xmlTreeParse(fileURL, useInternal=TRUE)
 df1993<-xmlToDataFrame(doc, stringsAsFactors=FALSE)
@@ -25,11 +27,43 @@ unique(df2013$country)
 summary(as.factor(df2013$country))
 barplot(table(df2013$country),las=2) #las sets label orientation
 
-## Create a list with all the XML file names
-## use lapply across each of these lists to download the file
+#############################################################################
+## create the list containing the names of the files containing
+## the Top 500 lists between 1993 and 2014
+##############################################################################
+filelist<-character(0)
+for (i in 1993:2014){
+    filelist<-c(filelist, paste(i,"06",sep=""),paste(i,"11",sep=""))
+}
+
+#############################################################################
+## ~Top500dataframe: This function downloads the XML for a specfied 
+##      year-month (YYYYMM) Top500 list and returns it as a data frame 
+#############################################################################
+Top500dataframe <- function(Top500list){
+    fileURL=paste(
+        "http://s.top500.org/static/lists/xml/TOP500_", 
+        Top500list,"_all.xml",sep="")
+    doc<-xmlTreeParse(fileURL, useInternal=TRUE)
+    df<-xmlToDataFrame(doc, stringsAsFactors=FALSE)
+}
+
+##############################################################################
+## use lapply to download the file for each Top500 list and put in a 
+## dataframe.
+## The code below returns a list of data frames.
+##############################################################################
+print(
+    system.time(
+        Top500.df<-lapply(filelist[1:2],Top500dataframe)
+        )
+)
+
+
 ##  and extract the number of systems in each country for that
 ##  year
 ##
+
 ## (note from a parallel point of view, the network will likely be 
 ##  the bottleneck)
 ##
