@@ -10,9 +10,17 @@
 source("Top500-Helper.R") # helper functions
 
 start.year <- 1993 # Initial year to read the Top 500 list 
-end.year <- 1993 # Final year to read the Top 500 list
+end.year <- 2013 # Final year to read the Top 500 list
 data.dir <- "data-Top500-lists"  # local directory where the lists are stored
 
+##############################################################################
+## ~ReadTop500file - This function takes a Top 500 filename, checks if
+##    a file of that name exists in the the local directory, reads
+##    that file into a data frame, and adds two columns, the first of which
+##    indicates the year of the Top500 list and the second of which
+##    indicates the month of the Top 500 list
+##  
+##############################################################################
 ReadTop500file <- function(Top500filename){
     if (file.exists(Top500filename)){
         df<-read.csv(Top500filename, stringsAsFactors=FALSE)
@@ -46,6 +54,6 @@ ReadTop500Lists<-function(dir, start.year, end.year){
 }
 
 # test run
-#top500.df<-ReadTop500Lists(paste("./",data.dir,sep=""),
-#                           start.year,end.year)
+top500.df<-ReadTop500Lists(paste("./",data.dir,sep=""),
+                           start.year,end.year)
 
