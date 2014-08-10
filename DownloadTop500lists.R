@@ -9,7 +9,8 @@
 
 library(XML)
 start.year <- 1993 # Initial year to download Top 500 list for 
-end.year <- 2013 # Final year to download Top 500 list for
+end.year <- 2013 # Final year to download To500 list for
+source("Top500-Helper.R") # helper functions
 
 ##############################################################################
 ## create the list containing the names of the files 
