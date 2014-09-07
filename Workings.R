@@ -65,3 +65,22 @@ with(top500.df[[1]],
             col=as.factor(area.of.installation),
             legend=unique(area.of.installation)))
 
+## Note from list Nov 20133 onwards, area.of.installation only has
+## a number and not character string
+
+with(Top500.df[[37]], 
+     plot(r.max, n.max, pch=19, 
+                           col=as.factor(area.of.installation),
+                           main=paste(list.year[1],list.month[1],sep=" ")
+     )
+)
+with(Top500.df[[37]], 
+     legend("top",unique(area.of.installation), 
+            fill=as.factor(unique(area.of.installation)),
+            
+                           )
+)
+
+
+
+
